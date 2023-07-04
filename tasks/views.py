@@ -16,10 +16,7 @@ class IndexView(generic.ListView):
         pk = request.POST.get('pk')
 
         task = Task.objects.get(id=pk)
-        if task.is_completed:
-            task.is_completed = False
-        else:
-            task.is_completed = True
+        task.is_completed = not task.is_completed
         task.save()
 
         return HttpResponseRedirect(self.request.path)
